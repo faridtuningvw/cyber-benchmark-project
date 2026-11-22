@@ -1,0 +1,22 @@
+# MANIFEST.sha256 lists every other file delivered on this branch.
+# It does not include its own byte size or SHA-256.
+# columns: sha256  bytes  path
+b2412d9945d7ccdbe11a30ada163d13f6551befde2a8cbed9ca3bc5de68ff732  287  .gitignore
+db2ca4f4730bed522fb0e91277aaf7d61c37cd0bdcd97ba1834e7420afb2b94c  10086  README.md
+b0f56bf1486f28e772ea147ea6b29d574291798d73a564bb7849f014754f9956  1391  build.bat
+5d9d0d3ce0069787db134ac902207406e29d2bd65f1fda9bf3eb787ce37b30e9  15135  driver/wt_phys.c
+c0aa9067b2539d0baa39260e2b9e056d205c4ec9a8e89f9945ef3cdb299eac43  51  driver/wt_phys.def
+bb9b60c60b8d5bd8089272e4b11cd67228af73c9bf1e8798e71875381be19694  4318  host/decode.h
+e87a6bcace6f18a8487d4f437a2daf23dd53b82cc0fc4e7f1c39c299038c04ee  2030  host/geom.h
+da156e3d3bf277fe17df2ce59af959ca108f9ae44deab44f3992feeaa4221dd3  4713  host/ini.h
+540fdea07f6c679d1b69b721ae1fe01e74604ee7669d477fb1931a89fb361438  15234  host/mapper.cpp
+496ef78f178271bb79d282d1190abc29d270f89885901f6e78c11dfca874390c  666  host/mapper.h
+e90f4f5d5c4a6dab2b08b682b56f19f9ee00e9414fd84485f87e44abed398e61  33629  host/nal.cpp
+1e274c3b95cbcd0f8ac41e0059863e6da75cf93d214e6c3d6188a4bbb78ef2ba  1743  host/nal.h
+672d45952e16e82d1b5777dcf6f5374a3c2714a60ecc3bba8d2cf6ab95f14c53  5930  host/overlay.cpp
+24adff68aa636868a6a32cb2e9d43480b974b3b4fdc61522bbd969fc5d66f3da  648  host/overlay.h
+a35bfb98653be1cbd0a267668e899d990e1e04a6e8f2c6b35335d932916500c5  13839  host/wt_host.cpp
+4b78c606e33f2f5d3d9f4b755c937fe45e87d248e334a329905981de2100f73b  1576  offsets.ini
+9bba43a46d32b76f8effa9633fba48928afbd760bc55d87aaa4b54974f7620c3  1941  shared/cleanup_stub.h
+4f7d62e48f54c72dfde7612327b1bd390ae08ec2002d370777cae2e3f29fcadd  1838  shared/protocol.h
+d2513aceeb4068f540a1dda3dc408c3bd28d27c78f22a7acea15c74a16b9cdb4  3921  tests/test_logic.cpp

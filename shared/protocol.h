@@ -1,7 +1,8 @@
 #pragma once
 
-/* Shared layout for the locked user page the payload polls.
-   Offsets are part of the ABI. Do not insert fields. */
+/* Shared layout for the user page the payload serves.
+   WT_COMM offsets are part of the ABI. Do not insert or reorder fields.
+   WT_MAP_PARAM is rewritten by the host before DriverEntry; both sides ship together. */
 
 typedef unsigned int wt_u32;
 typedef unsigned long long wt_u64;
@@ -32,7 +33,7 @@ typedef struct _WT_COMM {
 	wt_u32 cmd;                /* 8 */
 	wt_u32 pid;                /* 12 */
 	wt_u64 address;            /* 16 */
-	wt_u64 data_pa;            /* 24 */
+	wt_u64 data_pa;            /* 24, retained; host stores the data VA here for dumps */
 	wt_u32 size;               /* 32 */
 	wt_u32 pad;                /* 36 */
 	wt_u64 result;             /* 40 */
@@ -46,10 +47,21 @@ typedef struct _WT_ITEM {
 	wt_u32 pad;
 } WT_ITEM;
 
+/* Passed in nonpaged pool. DriverEntry rejects a non-canonical pointer. */
 typedef struct _WT_MAP_PARAM {
-	wt_u64 comm_pa;
-	wt_u64 data_pa;
-	wt_u64 legit;
+	wt_u64 comm_va;
+	wt_u64 data_va;
+	wt_u64 nt_add_atom;
 	wt_u32 magic;
 	wt_u32 client_pid;
+	wt_u64 image_base;
+	wt_u64 image_size;
+	wt_u64 free_pages;     /* MmFreeIndependentPages(base, size) */
+	wt_u64 ex_free_pool;   /* ExFreePool */
+	wt_u64 delay_fn;       /* KeDelayExecutionThread */
+	wt_u64 stub;           /* written back by DriverEntry */
+	wt_u32 hook_len;
+	wt_u32 zero;
+	unsigned char original[32];
+	unsigned char tramp[48];
 } WT_MAP_PARAM;
