@@ -1,3 +1,6 @@
+# Build products only. wt_phys.sys and wt_host.exe are not source and are not
+# committed: this tree has no binary that was actually linked. If you later
+# commit a binary you built, force-add it. Do not ignore MANIFEST.sha256.
 *.obj
 *.pdb
 *.exe
@@ -5,3 +8,4 @@
 *.ilk
 *.exp
 *.lib
+tests/test_logic

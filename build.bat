@@ -1,7 +1,8 @@
 @echo off
 setlocal
 rem Build wt_phys.sys (WDK) and wt_host.exe (MSVC x64).
-rem Run from an "x64 Native Tools Command Prompt for VS".
+rem Run from an "x64 Native Tools Command Prompt for VS" with the WDK installed.
+rem This script does not download iqvw64e.sys and does not produce a signed driver.
 
 if "%WindowsSdkDir%"=="" set WindowsSdkDir=C:\Program Files (x86)\Windows Kits\10\
 set "WDKINC="
@@ -23,12 +24,13 @@ cl /nologo /c /kernel /GS- /GR- /Gy- /O2 /W3 /D_AMD64_ /DAMD64 ^
   driver\wt_phys.c /Fodriver\wt_phys.obj
 if errorlevel 1 exit /b 1
 
-link /nologo /DRIVER /SUBSYSTEM:NATIVE /ENTRY:DriverEntry /NODEFAULTLIB ^
-  /OUT:wt_phys.sys driver\wt_phys.obj "%WDKLIB%\km\x64\ntoskrnl.lib" /IGNORE:4078
+link /nologo /DRIVER /SUBSYSTEM:NATIVE /ENTRY:DriverEntry /NODEFAULTLIB /FIXED:NO /GUARD:NO ^
+  /DEF:driver\wt_phys.def /OUT:wt_phys.sys driver\wt_phys.obj "%WDKLIB%\km\x64\ntoskrnl.lib" /IGNORE:4078
 if errorlevel 1 exit /b 1
 
-cl /nologo /O2 /W3 /EHsc /std:c++17 /DUNICODE /D_UNICODE host\wt_host.cpp ^
-  /Fe:wt_host.exe /link user32.lib gdi32.lib advapi32.lib psapi.lib ntdll.lib
+cl /nologo /O2 /W3 /EHsc /std:c++17 /DUNICODE /D_UNICODE /I. ^
+  host\nal.cpp host\mapper.cpp host\overlay.cpp host\wt_host.cpp ^
+  /Fe:wt_host.exe /link user32.lib gdi32.lib advapi32.lib shell32.lib bcrypt.lib
 if errorlevel 1 exit /b 1
 
 echo built wt_phys.sys and wt_host.exe

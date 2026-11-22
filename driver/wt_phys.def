@@ -1,0 +1,4 @@
+LIBRARY wt_phys
+EXPORTS
+    DriverEntry
+    WtGate
